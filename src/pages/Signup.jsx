@@ -58,7 +58,7 @@ import { Link, useNavigate } from "react-router-dom"
                     <label htmlFor="email">Email:</label>
                     <input
                 type="text"
-                    id="name"
+                    id="email"
                     value={email}
                     name="email"
                     onChange={handleChange}
