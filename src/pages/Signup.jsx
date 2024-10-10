@@ -29,10 +29,10 @@ import { Link, useNavigate } from "react-router-dom"
         }
     }
 
-    const { username, password, passwordConf } = userData
+    const { username, password, passwordConf, email } = userData
 
     const isFormInvalid = () => {
-        return !(username && password && password === passwordConf);
+        return !(username && email && password && password === passwordConf);
     }
 
     const isPWThere = () => {
@@ -51,6 +51,16 @@ import { Link, useNavigate } from "react-router-dom"
                     id="name"
                     value={username}
                     name="username"
+                    onChange={handleChange}
+                    />
+                </div>
+                <div>
+                    <label htmlFor="email">Email:</label>
+                    <input
+                type="text"
+                    id="name"
+                    value={email}
+                    name="email"
                     onChange={handleChange}
                     />
                 </div>
