@@ -16,4 +16,19 @@ const populatePets = async () => {
     }
 }
 
-export default populatePets
+const populateUserPets = async () => {
+    try {
+        const res = await fetch(`${BACKEND_URL}/profiles/:userId`, {
+            method: 'GET',
+        })
+        const json = await res.json();
+        if (json.error) {
+            throw new Error(json.error)
+        }
+    } catch (error) {
+        console.log(error)
+        throw error
+    }
+}
+
+export default {populatePets, populateUserPets}
