@@ -3,8 +3,10 @@ import * as petServices from '../services/petServices'
 import PetCard from '../components/PetCard'
 
 
-
 const Dashboard = () => {
+    // const [pets, setPets] = useState([])
+
+    const index = petServices.populatePets()
 
     return (
         <>
@@ -15,8 +17,11 @@ const Dashboard = () => {
         </div>
         <div className="pet-container">
             
+        {index.map((pet) =>(
+            <PetCard key={pet.id} pet={pet} />
+        ))}
         </div>
         </>
     )
-}
+} 
 export default Dashboard

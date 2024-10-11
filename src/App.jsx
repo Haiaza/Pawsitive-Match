@@ -1,6 +1,7 @@
 import './App.css'
 import { Route, Routes } from 'react-router-dom'
 import Home from './pages/Home'
+import Dashboard from './pages/Dashboard'
 import Signup from './pages/Signup'     
 import Signin from './pages/Signin'                                                                                                                                                                                                                                                      
 import Navbar from './components/Navbar'
@@ -16,6 +17,7 @@ function App() {
       <Navbar user = {user}/>
       <Routes>
         <Route path="/" element={<Home /> } />
+        <Route path='/testing' element = {<Dashboard />} />
         <Route path="/signup" element={<Signup setUser = {setUser} />} />
         <Route path="/signin" element={<Signin setUser = {setUser} />} />
       </Routes>
