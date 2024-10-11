@@ -1,13 +1,11 @@
-// SigninForm
-
 import { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import * as authService from '../../services/authService'; 
+import * as authService from '../services/authService'
 
-const SigninForm = (props) => {
+const Signin = (props) => {
     const navigate = useNavigate(); // added this for navigation purposes
     const [message, setMessage] = useState(['']);
-    const [formData, setFormData] = useState({
+    const [userData, setUserData] = useState({
         username: '',
         password: '',
 });
@@ -18,13 +16,13 @@ const SigninForm = (props) => {
 
     const handleChange = (e) => {
         updateMessage('');
-        setFormData({ ...formData, [e.target.name]: e.target.value });
+        setUserData({ ...userData, [e.target.name]: e.target.value });
     };
 
     const handleSubmit = async (e) => {
         e.preventDefault();
         try {
-        const user = await authService.signin(formData);
+        const user = await authService.signin(userData);
 
         props.setUser(user);
         navigate('/');
@@ -44,7 +42,7 @@ const SigninForm = (props) => {
                 type="text"
                 autoComplete="off"
                 id="username"
-                value={formData.username}
+                value={userData.username}
                 name="username"
                 onChange={handleChange}
             />
@@ -55,7 +53,7 @@ const SigninForm = (props) => {
                 type="password"
                 autoComplete="off"
                 id="password"
-                value={formData.password}
+                value={userData.password}
                 name="password"
                 onChange={handleChange}
             />
@@ -71,4 +69,4 @@ const SigninForm = (props) => {
     );
 };
 
-export default SigninForm;
+export default Signin;

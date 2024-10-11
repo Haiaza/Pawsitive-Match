@@ -1,5 +1,6 @@
 import { useState } from "react"
 import { Link, useNavigate } from "react-router-dom"
+import * as authService from '../services/authService'
 
     const Signup = (props) => {
     const navigate = useNavigate()
@@ -22,10 +23,12 @@ import { Link, useNavigate } from "react-router-dom"
     const handleSubmit = async (e) => {
         e.preventDefault()
         try {
-          props.setUser(userData) // this will modify the state in the App component
+            const user = await authService.signup(userData)
+
+          props.setUser(user) // this will modify the state in the App component
           navigate('/') // upon redirect you will see the "Dashboard" page
         } catch (err) {
-            updateMessage({ruhRoh: err.message})
+            updateMessage(err.message)
         }
     }
 
@@ -58,7 +61,7 @@ import { Link, useNavigate } from "react-router-dom"
                     <label htmlFor="email">Email:</label>
                     <input
                 type="text"
-                    id="email"
+                    id="email       "
                     value={email}
                     name="email"
                     onChange={handleChange}
