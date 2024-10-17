@@ -1,5 +1,5 @@
 import '../styles/index.scss'
-petServices from '../services/petServices'
+import petServices from '../services/petServices'
 import PetCard from '../components/PetCard'
 import { useState,useEffect } from 'react'
 
