@@ -1,12 +1,20 @@
-import '../styles/index.scss'
-import * as petServices from '../services/petServices'
+import '../styles/index.scss'petServices from '../services/petServices'
 import PetCard from '../components/PetCard'
+import { useState,useEffect } from 'react'
 
 
 const Dashboard = () => {
-    // const [pets, setPets] = useState([])
+    const [index, setIndex] = useState([])
+    
+    useEffect(() => {
+        const fetchPets = async () => {
+            const fetchedPets = await petServices.populatePets()
+            setIndex(fetchedPets)
+        }
 
-    const index = petServices.populatePets()
+        fetchPets()
+    },[])
+
 
     return (
         <>
@@ -17,7 +25,7 @@ const Dashboard = () => {
         </div>
         <div className="pet-container">
             
-        {index.map((pet) =>(
+        { index.map((pet) =>(
             <PetCard key={pet.id} pet={pet} />
         ))}
         </div>
