@@ -1,9 +1,10 @@
-import { useLocation, useParams } from 'react-router-dom';
+import { useLocation } from 'react-router-dom';
 import { Link } from 'react-router-dom';
 
 const Navbar = ({ user }) => {
 
-    const { param } = useParams()
+    const userId = user ? user._id : null;
+
     const location = useLocation()
 
     
@@ -13,20 +14,19 @@ const Navbar = ({ user }) => {
     return (
         <>
         { user ? (
-                /**Check if the My Pets looks/acts as expected with internet */
+                
             <nav>
                 <ul>
-                    <li><Link to="/profiles/">Home</Link></li>
+                    <li><Link to="/dash">Dashboard</Link></li>
                     <li><Link to="">Sign Out</Link></li>
-                    <li><Link to="/profiles/:userId/pets">My Pets</Link></li> 
+                    <li><Link to={`/profiles/${userId}`}>My Pets</Link></li> 
                 </ul>
             </nav>
         ) :
-        param === 'signin' ? ( /**CHECK IF THIS WORKS AS EXPECTED WITH INTERNET */
+        location.pathname === '/signin' ? ( 
             <nav>
                 <ul>
-                    <li>NOTHING</li>
-                    <li><Link to="/testing">Dashboard</Link></li>
+                    <li><Link to="/dash">Dashboard</Link></li>
                 </ul>
             </nav>
         ) :
@@ -34,7 +34,7 @@ const Navbar = ({ user }) => {
             <nav>
                 <ul>
                     <li><Link to="/signin">Sign In</Link></li>
-                    <li><Link to="/testing">Dashboard</Link></li>
+                    <li><Link to="/dash">Dashboard</Link></li>
                 </ul>
             </nav>
         )}
