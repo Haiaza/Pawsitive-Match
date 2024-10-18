@@ -6,6 +6,7 @@ import PetCard from '../components/PetCard'
 
 const UserPets = ({ user }) => {
     const [adoptedList, setAdoptedList] = useState([]);
+    const [pets, setPets] = useState([])
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
 
@@ -17,7 +18,10 @@ const UserPets = ({ user }) => {
             
             const { adoptedPets } = userAndPets.user
             console.log(adoptedPets)
-            setAdoptedList(adoptedPets);
+
+            setPets(adoptedPets)
+            setAdoptedList(pets);
+            
             console.log(adoptedList)
         } catch (err) {
             console.error('Error fetching user pets:', err);
