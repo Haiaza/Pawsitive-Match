@@ -12,9 +12,13 @@ const UserPets = ({ user }) => {
     useEffect(() => {
         const fetchUserPets = async () => {
         try {
-            const pets = await petServices.populateUserPets({ user });
-            console.log(pets)
-            setAdoptedList(pets);
+            const userAndPets = await petServices.populateUserPets({ user });
+            console.log(userAndPets)
+            
+            const { adoptedPets } = userAndPets.user
+            console.log(adoptedPets)
+            setAdoptedList(adoptedPets);
+            console.log(adoptedList)
         } catch (err) {
             console.error('Error fetching user pets:', err);
             setError('Failed to load pets. Please try again later.');
@@ -36,7 +40,7 @@ const UserPets = ({ user }) => {
     <>
         <h1>Your new friends</h1>
         {adoptedList.map((pet) => (
-            <PetCard pet={pet} key={pet.id} />
+            <PetCard pet={pet} key={pet} />
         ))}
     </>
     );
