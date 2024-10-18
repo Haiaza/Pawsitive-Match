@@ -7,6 +7,7 @@ import * as authService from '../services/authService'
     const [message, setMessage] = useState([""])
     const [userData, setUserData] = useState({
             username: '',
+            email:'',
             password: '',
             passwordConf: ''
     })
@@ -51,7 +52,7 @@ import * as authService from '../services/authService'
                     <label htmlFor="username">Username:</label>
                     <input
                 type="text"
-                    id="name"
+                    id="username"
                     value={username}
                     name="username"
                     onChange={handleChange}
@@ -60,7 +61,7 @@ import * as authService from '../services/authService'
                 <div>
                     <label htmlFor="email">Email:</label>
                     <input
-                type="text"
+                type="email"
                     id="email       "
                     value={email}
                     name="email"
