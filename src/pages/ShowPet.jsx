@@ -1,22 +1,28 @@
+import { useParams } from 'react-router-dom';
+import { useEffect, useState } from 'react';
+import petServices from '../services/petServices';
+import PetCard from '../components/PetCard';
 
-// profiles/:userId/pets
+const ShowPet = () => {
+    const { id } = useParams(); // Get the pet ID from the URL
+    const [pet, setPet] = useState(null);
 
-import * as petServices from '../services/petServices'
-import PetCard from '../components/PetCard'
+    useEffect(() => {
+        const fetchPet = async () => {
+            const fetchedPet = await petServices.specificPet(id); // Assuming you have a service to get pet by ID
+            setPet(fetchedPet);
+            console.log(fetchedPet)
+        };
+        fetchPet();
+    }, [id]);
 
-const adoptedList = petServices.populateUserpets()
-
-const UserPets = ({ user }) => {
-    adoptedList
-    
-    const List = user.adoptedPets
+    if (!pet) return <p>Loading...</p>;
 
     return (
         <>
-        <h1>Your new friends</h1>
-        {List.map((pet) => <PetCard pet={pet} key={pet.id} /> )}
+            <PetCard pet={pet}/>
         </>
-    )
-}
+    );
+};
 
-export default UserPets
+export default ShowPet;
