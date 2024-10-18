@@ -9,10 +9,13 @@ import ShowPet from './pages/ShowPet'
 import Navbar from './components/Navbar'
 import { useState } from 'react'
 
+import * as authService from './services/authService'
 
 
 function App() {
-  const [user, setUser] = useState(null)
+  const [user, setUser] = useState(authService.getUser())
+
+  console.log(user)
   
   return (
       <>
