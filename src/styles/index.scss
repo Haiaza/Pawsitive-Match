@@ -1,0 +1,22 @@
+body {
+    background-color: #F5F5DC;
+}
+
+nav {
+    
+}
+
+h1,h3,p {
+    color: #333333
+}
+
+.container-fluid li.nav-item .nav-link {
+    color: #FF6F61;
+    &:visited {
+        color: #A3D9B1
+    }    
+    &:hover {
+            color: #FFAB91
+        }
+}
+
