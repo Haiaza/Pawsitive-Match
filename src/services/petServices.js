@@ -22,8 +22,9 @@ const populatePets = async () => {
 const populateUserPets = async ({ user }) => {
     console.log('populateUserPets is working')
 
+    console.log(user)
     const userId =  user._id
-    const token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6IlN0cmluZyIsIl9pZCI6IjY3MDQ4Y2M4NGY2N2ZmYmUyYzk1MTQxYSIsImlhdCI6MTcyOTIyNzA0M30.FWAUyJfsmcvljZjgrfk3E_cIY8MLm2BRfFuTxmEBZY4"  //remove after testing 
+    const token = `${localStorage.getItem('token')}`  
     try {
         const res = await fetch(`${BACKEND_URL}/profiles/${userId}`, {
             method: 'GET',
@@ -64,4 +65,24 @@ const specificPet = async (pet) => {
     }
 }
 
-export default {populatePets, populateUserPets , specificPet}
+const submitPet = async (pet) => {
+    try {
+        const res = await fetch(`${BACKEND_URL}/pets` , {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(pet),
+        });
+        
+        const json = await res.json()
+        if (json.error) {
+            throw new Error(json.error)
+        }
+        console.log(json)
+        return json
+    } catch (error) {
+        console.log(error)
+        throw error
+    }
+}
+
+export default {populatePets, populateUserPets , specificPet, submitPet}
