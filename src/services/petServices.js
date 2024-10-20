@@ -45,10 +45,9 @@ const populateUserPets = async ({ user }) => {
 }
 
 
-const specificPet = async (id) => {
-    console.log('specificPets is working')
+const specificPet = async (pet) => {
     try {
-        const res = await fetch(`${BACKEND_URL}/pets/${id}` , {
+        const res = await fetch(`${BACKEND_URL}/pets/${pet}` , {
             method: 'GET',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify(),
@@ -57,6 +56,7 @@ const specificPet = async (id) => {
         if (json.err) {
             throw new Error(json.err);
         }
+        console.log(pet)
         return json;
     } catch (error) {
         console.log(error)

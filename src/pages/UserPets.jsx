@@ -5,8 +5,7 @@ import petServices from '../services/petServices';
 import PetCard from '../components/PetCard'
 
 const UserPets = ({ user }) => {
-    const [adoptedList, setAdoptedList] = useState([]);
-    const [pets, setPets] = useState([])
+    const [adoptedList, setAdoptedList] = useState([{}]);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
 
@@ -14,15 +13,23 @@ const UserPets = ({ user }) => {
         const fetchUserPets = async () => {
         try {
             const userAndPets = await petServices.populateUserPets({ user });
-            console.log(userAndPets)
-            
             const { adoptedPets } = userAndPets.user
             console.log(adoptedPets)
 
-            setPets(adoptedPets)
-            setAdoptedList(pets);
-            
+            const petDetails = await Promise.all(
+                adoptedPets.map((petObj) => {
+                    const petData = petServices.specificPet(petObj._id)
+                    console.log(petObj)
+                    return petData
+                }
+            ) 
+        )
+            console.log(petDetails)
+
+            setAdoptedList(petDetails);
             console.log(adoptedList)
+            console.log(user)
+            
         } catch (err) {
             console.error('Error fetching user pets:', err);
             setError('Failed to load pets. Please try again later.');
