@@ -74,10 +74,7 @@ const submitPet = async (pet) => {
         });
         console.log(JSON.stringify(pet))
 
-        const data = await res; 
-        const filteredData = (data.json().then((x) => {return (x)})); // Parse the JSON from the response and Log the parsed data
 
-        console.log(filteredData)
     } catch (error) {
         console.log(error)
         throw error
