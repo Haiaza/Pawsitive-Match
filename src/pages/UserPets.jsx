@@ -11,6 +11,7 @@ const UserPets = ({ user }) => {
 
     useEffect(() => {
         const fetchUserPets = async () => {
+            console.log(user)
         try {
             const userAndPets = await petServices.populateUserPets({ user });
             const { adoptedPets } = userAndPets.user
@@ -50,8 +51,8 @@ const UserPets = ({ user }) => {
     return (
     <>
         <h1>Your new friends</h1>
-        {adoptedList.map((pet) => (
-            <PetCard pet={pet} key={pet} />
+        {adoptedList.map((pet,idx) => (
+            <PetCard pet={pet} key={idx} />
         ))}
     </>
     );

@@ -13,20 +13,20 @@ import * as authService from './services/authService'
 
 
 function App() {
-  const [user, setUser] = useState(authService.getUser())
+  const [myUser, setMyUser] = useState(authService.getUser())
 
-  console.log(user)
+  console.log(myUser)
   
   return (
       <>
-      <Navbar user = {user}/>
+      <Navbar user = {myUser}/>
       <Routes>
         <Route path="/" element={<Landing /> } />
         <Route path='/dash' element = {<Dashboard />} /> 
-        <Route path="/signup" element={<Signup setUser = {setUser} />} />
-        <Route path="/signin" element={<Signin setUser = {setUser} />} />
+        <Route path="/signup" element={<Signup setUser = {setMyUser} />} />
+        <Route path="/signin" element={<Signin setUser = {setMyUser} />} />
         <Route path="/pets/:id" element={<ShowPet />} />
-        <Route path="/profiles/:userId" element={<UserPets user={user}/>} />
+        <Route path="/profiles/:userId" element={<UserPets user={myUser}/>} />
       </Routes>
       </>
   )
