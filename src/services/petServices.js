@@ -67,18 +67,17 @@ const specificPet = async (pet) => {
 
 const submitPet = async (pet) => {
     try {
-        const res = await fetch(`${BACKEND_URL}/pets` , {
+        const res = await fetch(`${BACKEND_URL}/pets`, {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify(pet),
         });
-        
-        const json = await res.json()
-        if (json.error) {
-            throw new Error(json.error)
-        }
-        console.log(json)
-        return json
+        console.log(JSON.stringify(pet))
+
+        const data = await res; 
+        const filteredData = (data.json().then((x) => {return (x)})); // Parse the JSON from the response and Log the parsed data
+
+        console.log(filteredData)
     } catch (error) {
         console.log(error)
         throw error
