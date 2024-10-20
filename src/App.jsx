@@ -8,7 +8,7 @@ import UserPets from './pages/UserPets'
 import ShowPet from './pages/ShowPet'
 import PetSubmissionForm from './pages/PetSubMissionForm'                                                                                                                                                                                                                                         
 import Navbar from './components/Navbar'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 
 import * as authService from './services/authService'
 import petServices from './services/petServices'
@@ -16,12 +16,21 @@ import petServices from './services/petServices'
 
 function App() {
   const [myUser, setMyUser] = useState(authService.getUser())
-  const [petDb, setPetDb] = useState(petServices.populatePets())
+  const [petDb, setPetDb] = useState([])
 
-  console.log(petDb.then((res) => {
+  
+  let fill = petServices.populatePets().then((res) => {
     console.log(res)
-  }))
+    res.map((petObj) => {
+      setPetDb(...petDb.push(petObj))
+    })
+  })
 
+  useEffect(() => {
+    fill
+    ,[petDb]
+  })
+  console.log(petDb)
   console.log(myUser)
   
   return (
