@@ -25,7 +25,7 @@ const Signin = (props) => {
         const user = await authService.signIn(userData);
 
         props.setUser(user);
-        navigate('/');
+        navigate('/dash');
         } catch (err) {
         updateMessage(err.message);
         }
