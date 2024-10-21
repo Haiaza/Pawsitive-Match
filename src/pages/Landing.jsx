@@ -20,7 +20,7 @@ const Landing = () => {
     }, [])
 
     return (
-    <div className="hero-container">
+    <div className="hero-container prociono-regular">
         <img src="" alt="logoImage" />
         <h1>Pawsitive Match</h1>
         <p>Find Your Furry Forever Friend!</p>

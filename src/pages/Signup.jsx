@@ -24,7 +24,7 @@ import * as authService from '../services/authService'
     const handleSubmit = async (e) => {
         e.preventDefault()
         try {
-            const user = await authService.signup(userData)
+            const user = await authService.signUp(userData)
 
           props.setUser(user) // this will modify the state in the App component
           navigate('/') // upon redirect you will see the "Dashboard" page
@@ -44,55 +44,57 @@ import * as authService from '../services/authService'
     }
 
     return (
-        <main>
-            <h1>Sign Up</h1>
+        <main className="container d-flex justify-content-center align-items-center">
+            <h1>Sign Up!</h1>
             <p>{message}</p>
             <form onSubmit={handleSubmit}>
-                <div>
-                    <label htmlFor="username">Username:</label>
-                    <input
-                type="text"
-                    id="username"
-                    value={username}
-                    name="username"
-                    onChange={handleChange}
-                    />
-                </div>
-                <div>
-                    <label htmlFor="email">Email:</label>
-                    <input
-                type="email"
-                    id="email       "
-                    value={email}
-                    name="email"
-                    onChange={handleChange}
-                    />
-                </div>
-                <div>
-                    <label htmlFor="password">Password:</label>
-                    <input
-                    type="password"
-                    id="password"
-                    value={password}
-                    name="password"
-                    onChange={handleChange}
-                    />
-                </div>
-                <div>
-                    <label htmlFor="confirm">Confirm Password:</label>
-                    <input
-                        type="password"
-                        id="confirm"
-                        value={passwordConf}
-                        name="passwordConf"
+                <div className="row .row-cols-2">
+                    <div className="col-form-label-sm">
+                        <label htmlFor="username" className="">Username:</label>
+                        <input
+                    type="text"
+                        id="username"
+                        value={username}
+                        name="username"
                         onChange={handleChange}
-                        disabled={isPWThere()}
-                    />
+                        />
+                    </div>
+                    <div className="col-form-label-sm">
+                        <label htmlFor="email" className="">Email:</label>
+                        <input
+                    type="email"
+                        id="email"
+                        value={email}
+                        name="email"
+                        onChange={handleChange}
+                        />
+                    </div>
+                    <div className="col-form-label-sm">
+                        <label htmlFor="password">Password:</label>
+                        <input
+                        type="password"
+                        id="password"
+                        value={password}
+                        name="password"
+                        onChange={handleChange}
+                        />
+                    </div>
+                    <div className="col-form-label-sm">
+                        <label htmlFor="confirm">Confirm Password:</label>
+                        <input
+                            type="password"
+                            id="confirm"
+                            value={passwordConf}
+                            name="passwordConf"
+                            onChange={handleChange}
+                            disabled={isPWThere()}
+                        />
+                    </div>
                 </div>
                 <div>
-                    <button disabled={isFormInvalid()}>Sign Up</button>
+                    <button  className="btn btn-outline-primary"disabled={isFormInvalid()}>Sign Up</button>
                     <Link to="/">
-                        <button>Cancel</button>
+                        <button className="btn btn-outline-primary">Cancel</button>
                     </Link>
                 </div>
             </form>

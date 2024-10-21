@@ -22,7 +22,7 @@ const Signin = (props) => {
     const handleSubmit = async (e) => {
         e.preventDefault();
         try {
-        const user = await authService.signin(userData);
+        const user = await authService.signIn(userData);
 
         props.setUser(user);
         navigate('/');
@@ -32,11 +32,11 @@ const Signin = (props) => {
     };
 
     return (
-        <main>
+        <main >
         <h1>Log In</h1>
         <p>{message}</p>
         <form autoComplete="off" onSubmit={handleSubmit}>
-            <div>
+            <div className='col-form-label-sm'>
             <label htmlFor="email">Username:</label>
             <input
                 type="text"
@@ -47,7 +47,7 @@ const Signin = (props) => {
                 onChange={handleChange}
             />
             </div>
-            <div>
+            <div className='col-form-label-sm'>
             <label htmlFor="password">Password:</label>
             <input
                 type="password"
@@ -59,9 +59,9 @@ const Signin = (props) => {
             />
             </div>
             <div>
-            <button>Log In</button>
+            <button className="btn btn-outline-primary">Log In</button>
             <Link to="/">
-                <button>Cancel</button>
+                <button className="btn btn-outline-secondary">Cancel</button>
             </Link>
             </div>
         </form>
