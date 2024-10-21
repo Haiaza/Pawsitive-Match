@@ -1,6 +1,6 @@
 const BACKEND_URL = 'http://localhost:3000'; // The Express API url
 
-const signup = async (userData) => {
+const signUp = async (userData) => {
   try {
     const res = await fetch(`${BACKEND_URL}/users/signup`, {
       method: 'POST',
@@ -24,7 +24,7 @@ const signup = async (userData) => {
   }
 };
 
-const signin = async (user) => {
+const signIn = async (user) => {
     try {
       const res = await fetch(`${BACKEND_URL}/users/signin`, {
         method: 'POST',
@@ -41,6 +41,7 @@ const signin = async (user) => {
         localStorage.setItem('token', json.token); // add this line to store the JWT token in localStorage
 
         const user = JSON.parse(atob(json.token.split('.')[1]));
+        console.log(user)
         return user;
       }
     } catch (err) {
@@ -55,5 +56,18 @@ const signin = async (user) => {
     const myUser = JSON.parse(atob(token.split('.')[1]));
     return myUser;
   }
+
+  const signOut = ({user}) => {
+    try {
+      localStorage.removeItem('token');
+      // You can add any additional cleanup here, such as clearing other storage or state
+      user = null
+      return true; //successful sign-out
+
+    } catch (err) {
+      console.log(err);
+      return false; //failed sign-out
+    }
+  };
   
-  export { signup, signin, getUser};
+  export { signUp, signIn, getUser, signOut};
