@@ -67,13 +67,28 @@ const specificPet = async (pet) => {
 
 const submitPet = async (pet) => {
     try {
+        // to match the API format
+        const breed = pet.breed.toLowerCase().split(' ').reverse().join('/')
+        console.log(breed)
+
+        // random dog image for the breed
+        const imageRes = await fetch(`https://dog.ceo/api/breed/${breed}/images/random`)
+        const imageData = await imageRes.json()
+
+        if (imageData.status === 'success') {
+            // Attach the fetched image URL to the pet object
+            pet.pic = imageData.message
+        } else {
+            throw new Error('Breed not found or no image available')
+        }
+
         const res = await fetch(`${BACKEND_URL}/pets`, {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify(pet),
         });
-        console.log(JSON.stringify(pet))
-
+        const data = res.json()
+        console.log(data)
 
     } catch (error) {
         console.log(error)
