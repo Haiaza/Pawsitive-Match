@@ -2,6 +2,7 @@ import { useParams } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import petServices from '../services/petServices';
+import userServices from '../services/userServices';
 
 const AdoptionForm = ({ user }) => {
     const navigate = useNavigate()
@@ -28,13 +29,22 @@ const AdoptionForm = ({ user }) => {
         setIsAdopting(true)
 
         try {
-            const updatedPet = {...pet, isAdopted: true}
-            await petServices.updatePet(id, updatedPet) // blueprint
+            const updatedPet = {...pet, isAdopted: true, adoptedBy: user._id }
+            const savedPet = await petServices.updatePet(id, updatedPet)
 
-            // const updatedUser = {...user, adoptedPets: [...user.adoptedPets, id]}
-            // await userServices.updateUser(user.id, updatedUser)  TBD
+            console.log(pet) //pet object
+            console.log(pet._id) //pet object Id
+            await petServices.specificPet(id, updatedPet)
 
-            setPet(updatedPet)
+            const updatedUser = {
+                ...user,
+                adoptedPets: [...(user.adoptedPets || []), id]
+            }
+            console.log(updatedUser)
+            console.log(user)
+            await userServices.updateUser(user._id, updatedUser) 
+
+            setPet(savedPet)
 
         } catch (error) {
             console.log("Error during adoption:", error)

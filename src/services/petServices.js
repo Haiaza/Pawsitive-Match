@@ -96,4 +96,22 @@ const submitPet = async (pet) => {
     }
 }
 
-export default {populatePets, populateUserPets , specificPet, submitPet}
+const updatePet = async (petId, updatedPet) => {
+    try {
+        const res = await fetch(`${BACKEND_URL}/users/${petId}/pets`, {
+            method: 'PUT',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(updatedPet),
+        });
+        const json = await res.json()
+        if (json.err) {
+            throw new Error(json.err);
+        }
+        return json;
+    } catch (error) {
+        console.log(error)
+        throw error
+    }
+}
+
+export default {populatePets, populateUserPets , specificPet, submitPet, updatePet}
