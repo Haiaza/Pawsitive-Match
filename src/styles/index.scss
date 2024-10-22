@@ -2,12 +2,19 @@ body {
     background-color: #F5F5DC;
 }
 
-nav {
+nav-{
     
 }
 
 h1,h3,p {
     color: #333333
+}
+
+.pet-card {
+    img {
+        height: 375px;
+        width: 500px;
+    }
 }
 
 .container-fluid li.nav-item .nav-link {
@@ -20,3 +27,27 @@ h1,h3,p {
         }
 }
 
+.hero-container {
+    border: solid #FFA07A;
+    img {
+        height: 375px;
+        width: 500px;
+    }
+}
+
+
+.prociono-regular > * {
+    font-family: "Prociono", serif;
+    font-weight: 400;
+    font-style: normal;
+}  
+
+.barlow-medium  > * {
+    font-family: "Barlow", serif;
+    font-weight: 500;
+    font-style: normal;
+  }
+
+.sign__form{
+    
+}
