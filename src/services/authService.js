@@ -57,11 +57,18 @@ const signIn = async (user) => {
     return myUser;
   }
 
-  const signOut = ({user}) => {
+  const signOut = (props) => {
     try {
-      localStorage.removeItem('token');
+      const token = localStorage.getItem('token');
+
+
+      if (token) {
+        localStorage.removeItem('token');
+        
+      } else {
+        console.log("No token found. User might already be signed out.");
+      }
       // You can add any additional cleanup here, such as clearing other storage or state
-      user = null
       return true; //successful sign-out
 
     } catch (err) {
