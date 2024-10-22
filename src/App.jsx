@@ -7,6 +7,7 @@ import Signin from './pages/Signin'
 import UserPets from './pages/UserPets'        
 import ShowPet from './pages/ShowPet'
 import PetSubmissionForm from './pages/PetSubMissionForm'                                                                                                                                                                                                                                         
+import ApplicationForm from './pages/ApplicationForm'
 import Navbar from './components/Navbar'
 import { useEffect, useState } from 'react'
 
@@ -18,20 +19,24 @@ function App() {
   const [myUser, setMyUser] = useState(authService.getUser())
   const [petDb, setPetDb] = useState([])
 
-  
-  let fill = petServices.populatePets().then((res) => {
-    console.log(res)
-    res.map((petObj) => {
-      setPetDb(...petDb.push(petObj))
-    })
-  })
-
-  useEffect(() => {
-    fill
-    ,[petDb]
-  })
-  console.log(petDb)
   console.log(myUser)
+  
+  useEffect(() => {
+    
+    const fetchPets = async () => {
+      try {
+          const res = await petServices.populatePets()
+          setPetDb(res)
+          return petDb
+      } catch (error) {
+        console.error('Error fetching:', error)
+      }
+    }
+
+    fetchPets()
+  },[])
+  // console.log(petDb)
+  console.log(localStorage.getItem('token'))
   
   return (
       <>
@@ -43,7 +48,8 @@ function App() {
         <Route path="/signin" element={<Signin setUser = {setMyUser} />} />
         <Route path="/pets/:id" element={<ShowPet />} />
         <Route path="/profiles/:userId" element={<UserPets user={myUser}/>} />
-        <Route path='/TEST' element={<PetSubmissionForm />} />
+        <Route path='/pets/submit' element={<PetSubmissionForm />} />
+        <Route path='/pets/:id/adoption' element={<ApplicationForm  user={myUser} />} />
       </Routes>
       </>
   )
