@@ -2,7 +2,6 @@ import { useState } from 'react';
 import petServices from '../services/petServices';
 
 function PetSubmissionForm() {
-    // const navigate = useNavigate()
     const [message, setMessage] = useState([""])
     const [formData, setFormData] = useState({
         name: '',
@@ -36,12 +35,17 @@ const handleSubmit = async (e) => {
     e.preventDefault();
     try {
         const pet = await petServices.submitPet(formData)
+        setMessage("Pet submitted successfully!")
+        console.log('New Buddy:', pet);
+        console.log(pet)
 
     } catch (error) {
         updateMessage(error.message)
     }
     console.log('Form Data:', formData);
 };
+
+console.log(formData.pic)
 
 return (
     <form onSubmit={handleSubmit}>
@@ -82,17 +86,16 @@ return (
         />
     </div>
 
-    <div>
+    {/* <div>
         <label htmlFor="pic">Upload Image:</label>
         <input
         type="file"
         id="pic"
         name="pic"
-        accept="pic/*"
+        accept="image/*"
         onChange={handleChange}
-        required
         />
-    </div>
+    </div> */}
 
     <button type="submit">Submit</button>
     </form>

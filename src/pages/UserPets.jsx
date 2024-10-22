@@ -1,6 +1,7 @@
 
 
 import { useState, useEffect } from 'react'
+import { useNavigate, useParams } from 'react-router-dom';
 import petServices from '../services/petServices';
 import PetCard from '../components/PetCard'
 
@@ -8,6 +9,12 @@ const UserPets = ({ user }) => {
     const [adoptedList, setAdoptedList] = useState([{}]);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
+    const { id } = useParams();
+    // const navigate = useNavigate()
+
+    console.log(id)
+
+
 
     useEffect(() => {
         const fetchUserPets = async () => {
@@ -50,7 +57,7 @@ const UserPets = ({ user }) => {
 
     return (
     <>
-        <h1>Your new friends</h1>
+        <h1>Your new friends, {user.username}</h1>
         {adoptedList.map((pet,idx) => (
             <PetCard pet={pet} key={idx} />
         ))}

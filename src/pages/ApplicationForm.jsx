@@ -5,25 +5,34 @@ import petServices from '../services/petServices';
 import userServices from '../services/userServices';
 
 const AdoptionForm = ({ user }) => {
+    console.log(user)
+
     const navigate = useNavigate()
     const { id } = useParams() // petId
     const [pet, setPet] = useState(null);
     const [isAdopting, setIsAdopting] = useState(false)
-
-    console.log(id)
+    const [error, setError] = useState(null);
 
     useEffect(() => {
         const fetchPet = async () => {
             try {
-                const fetchedPet = await petServices.specificPet(id); 
+                if (!localStorage.getItem('token')) {
+                    throw new Error('Please log in to view pet details');
+                }
+                const fetchedPet = await petServices.specificPet(id);
                 setPet(fetchedPet);
-                console.log(fetchedPet); 
             } catch (error) {
-                console.log("Error fetching pet:", error); 
+                if (error.message.includes('token')) {
+                    setError("Authentication error. Please log in again.");
+                    navigate('/login'); // if token is invalid,redirect to login 
+                } else {
+                    setError("Error fetching pet details: " + error.message);
+                }
+                console.log("Error fetching pet:", error);
             }
         };
         fetchPet();
-    }, [id]);
+    }, [id, navigate]);
     
     const handleAdopt = async () => {
         setIsAdopting(true)
@@ -41,7 +50,7 @@ const AdoptionForm = ({ user }) => {
                 adoptedPets: [...(user.adoptedPets || []), id]
             }
             console.log(updatedUser)
-            console.log(user)
+            console.log(user._id)
             await userServices.updateUser(user._id, updatedUser) 
 
             setPet(savedPet)
@@ -50,8 +59,6 @@ const AdoptionForm = ({ user }) => {
             console.log("Error during adoption:", error)
         }
     }
-
-    console.log(pet)
 
     return ( 
         <div>
