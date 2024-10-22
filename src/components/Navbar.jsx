@@ -41,17 +41,17 @@ const Navbar = ({ user }) => {
             </nav>
         ) :
         location.pathname === '/signin' ? ( 
-            <nav>
-                <ul>
-                    <li><Link to="/dash">Dashboard</Link></li>
+            <nav className='navbar  bg-body-tertiary'>
+                <ul className='navbar-nav'>
+                    <li className='nav-item'><Link className='nav-link' to="/dash">Dashboard</Link></li>
                 </ul>
             </nav>
         ) :
         (
-            <nav>
-                <ul>
-                    <li><Link to="/signin">Sign In</Link></li>
-                    <li><Link to="/dash">Dashboard</Link></li>
+            <nav className='navbar  bg-body-tertiary'>
+                <ul className='navbar-nav'>
+                    <li className='nav-item'><Link className='nav-link' to="/signin">Sign In</Link></li>
+                    <li className='nav-item'><Link className='nav-link' to="/dash">Dashboard</Link></li>
                 </ul>
             </nav>
         )}
