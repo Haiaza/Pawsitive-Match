@@ -51,7 +51,6 @@ const specificPet = async (pet) => {
         const res = await fetch(`${BACKEND_URL}/pets/${pet}` , {
             method: 'GET',
             headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify(),
         });
         const json = await res.json()
         if (json.err) {
@@ -87,7 +86,7 @@ const submitPet = async (pet) => {
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify(pet),
         });
-        const data = res.json()
+        const data = await res.json()
         console.log(data)
 
     } catch (error) {
@@ -97,12 +96,21 @@ const submitPet = async (pet) => {
 }
 
 const updatePet = async (petId, updatedPet) => {
+
+    const token = `${localStorage.getItem('token')}`
+
     try {
+        console.log(petId)
         const res = await fetch(`${BACKEND_URL}/users/${petId}/pets`, {
             method: 'PUT',
-            headers: { 'Content-Type': 'application/json' },
+            headers: { 
+                'Content-Type': 'application/json', 
+                'Authorization': `Bearer ${token}`,
+            },
             body: JSON.stringify(updatedPet),
         });
+        console.log('Request body:', JSON.stringify(updatedPet));
+        
         const json = await res.json()
         if (json.err) {
             throw new Error(json.err);
