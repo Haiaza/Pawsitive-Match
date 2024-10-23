@@ -57,7 +57,7 @@ const signIn = async (user) => {
     return myUser;
   }
 
-  const signOut = (props) => {
+  const signOut = () => {
     try {
       const token = localStorage.getItem('token');
 

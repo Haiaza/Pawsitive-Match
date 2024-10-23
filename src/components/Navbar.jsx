@@ -1,15 +1,20 @@
 import { useLocation } from 'react-router-dom';
 import { Link } from 'react-router-dom';
 import { signOut } from '../services/authService';
+import { useNavigate } from 'react-router-dom';
 
-const Navbar = ({ user }) => {
+const Navbar = ({ user, setMyUser }) => {
 
     const userId = user ? user._id : null;
+    const navigate = useNavigate()
 
     const handleSignOut = () => {
 
             if (signOut()) {
                 console.log('User signed out successfully');
+                setMyUser(null)
+                navigate('/login')
+                
             } else {
                 console.log('Sign-out failed');
             }
