@@ -1,7 +1,9 @@
 import { useState } from 'react';
 import petServices from '../services/petServices';
+import { useNavigate } from 'react-router-dom';
 
 function PetSubmissionForm() {
+    const navigate = useNavigate()
     const [message, setMessage] = useState([""])
     const [formData, setFormData] = useState({
         name: '',
@@ -38,6 +40,7 @@ const handleSubmit = async (e) => {
         setMessage("Pet submitted successfully!")
         console.log('New Buddy:', pet);
         console.log(pet)
+        navigate('/dash')
 
     } catch (error) {
         updateMessage(error.message)
@@ -85,17 +88,6 @@ return (
         required
         />
     </div>
-
-    {/* <div>
-        <label htmlFor="pic">Upload Image:</label>
-        <input
-        type="file"
-        id="pic"
-        name="pic"
-        accept="image/*"
-        onChange={handleChange}
-        />
-    </div> */}
 
     <button type="submit">Submit</button>
     </form>
