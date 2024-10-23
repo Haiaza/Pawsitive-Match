@@ -40,13 +40,13 @@ function App() {
   
   return (
       <>
-      <Navbar user = {myUser}/>
+      <Navbar user = {myUser} setUser = {setMyUser}/>
       <Routes>
         <Route path="/" element={<Landing /> } />
         <Route path='/dash' element = {<Dashboard />} /> 
         <Route path="/signup" element={<Signup setUser = {setMyUser} />} />
         <Route path="/signin" element={<Signin setUser = {setMyUser} />} />
-        <Route path="/pets/:id" element={<ShowPet />} />
+        <Route path="/pets/:id" element={<ShowPet user = {myUser} setUser = {setMyUser} />} />
         <Route path="/profiles/:userId" element={<UserPets user={myUser}/>} />
         <Route path='/pets/submit' element={<PetSubmissionForm />} />
         <Route path='/pets/:id/adoption' element={<ApplicationForm  user={myUser} />} />

@@ -12,31 +12,31 @@ const UserPets = ({ user }) => {
     const { id } = useParams();
     // const navigate = useNavigate()
 
-    console.log(id)
+    
 
 
 
     useEffect(() => {
         const fetchUserPets = async () => {
-            console.log(user)
+            
         try {
             const userAndPets = await petServices.populateUserPets({ user });
             const { adoptedPets } = userAndPets.user
-            console.log(adoptedPets)
+            
 
             const petDetails = await Promise.all(
                 adoptedPets.map((petObj) => {
                     const petData = petServices.specificPet(petObj._id)
-                    console.log(petObj)
+                    
                     return petData
                 }
             ) 
         )
-            console.log(petDetails)
+            
 
             setAdoptedList(petDetails);
-            console.log(adoptedList)
-            console.log(user)
+            
+            
             
         } catch (err) {
             console.error('Error fetching user pets:', err);

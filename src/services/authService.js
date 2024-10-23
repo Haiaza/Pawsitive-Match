@@ -41,7 +41,6 @@ const signIn = async (user) => {
         localStorage.setItem('token', json.token); // add this line to store the JWT token in localStorage
 
         const user = JSON.parse(atob(json.token.split('.')[1]));
-        console.log(user)
         return user;
       }
     } catch (err) {
@@ -65,8 +64,6 @@ const signIn = async (user) => {
       if (token) {
         localStorage.removeItem('token');
         
-      } else {
-        console.log("No token found. User might already be signed out.");
       }
       // You can add any additional cleanup here, such as clearing other storage or state
       return true; //successful sign-out

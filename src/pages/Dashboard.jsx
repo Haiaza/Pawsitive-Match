@@ -14,7 +14,6 @@ const Dashboard = () => {
         const fetchPets = async () => {
             const fetchedPets = await petServices.populatePets()
             setIndex(fetchedPets)
-            console.log(fetchedPets)
         }
 
         fetchPets()
@@ -24,7 +23,6 @@ const Dashboard = () => {
     return (
         <>
           <div className="hero-container">
-            <img src="" alt="logoImage" />
             <h1>Pawsitive Match</h1>
             <p>Find Your Furry Forever Friend!</p>
           </div>

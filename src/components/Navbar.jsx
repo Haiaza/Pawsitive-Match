@@ -13,11 +13,7 @@ const Navbar = ({ user, setMyUser }) => {
             if (signOut()) {
                 console.log('User signed out successfully');
                 setMyUser(null)
-                navigate('/login')
-                
-            } else {
-                console.log('Sign-out failed');
-            }
+                navigate('/login')}
         }
 
     const location = useLocation()

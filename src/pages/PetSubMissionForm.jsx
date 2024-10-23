@@ -36,19 +36,12 @@ const updateMessage = (msg) => {
 const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-        const pet = await petServices.submitPet(formData)
-        setMessage("Pet submitted successfully!")
-        console.log('New Buddy:', pet);
-        console.log(pet)
         navigate('/dash')
 
     } catch (error) {
         updateMessage(error.message)
     }
-    console.log('Form Data:', formData);
 };
-
-console.log(formData.pic)
 
 return (
     <form onSubmit={handleSubmit}>

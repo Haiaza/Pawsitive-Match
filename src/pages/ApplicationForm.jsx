@@ -4,7 +4,7 @@ import { Link, useNavigate } from 'react-router-dom';
 import petServices from '../services/petServices';
 
 const AdoptionForm = ({ user }) => {
-    console.log(user)
+    
 
     const navigate = useNavigate()
     const { id } = useParams() // petId
@@ -20,7 +20,7 @@ const AdoptionForm = ({ user }) => {
                 }
                 const fetchedPet = await petServices.specificPet(id);
                 setPet(fetchedPet);
-                console.log(fetchedPet)
+                
             } catch (error) {
                 if (error.message.includes('token')) {
                     setError("Authentication error. Please log in again.");
@@ -28,7 +28,6 @@ const AdoptionForm = ({ user }) => {
                 } else {
                     setError("Error fetching pet details: " + error.message);
                 }
-                console.log("Error fetching pet:", error);
             }
         };
         fetchPet();
@@ -40,13 +39,13 @@ const AdoptionForm = ({ user }) => {
             const response  = await petServices.updatePetAndUser({user,pet})
             setPet(response.pet); // Update pet in state
         }catch (error) {
-            console.log("Error adopting pet:", error);
+            console.error(error)
         } finally {
             setIsAdopting(false); // Reset loading state
         }
     }        
     
-console.log(pet)
+
     return ( 
         <div>
         {pet ? ( 

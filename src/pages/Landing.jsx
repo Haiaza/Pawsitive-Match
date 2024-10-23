@@ -10,8 +10,7 @@ const Landing = () => {
         const res = await fetch(`https://dog.ceo/api/breeds/image/random`)
         const data = await res.json()
         
-        console.log(data.message)
-
+        
         setDogSrc(data.message)
     }
 
@@ -21,7 +20,6 @@ const Landing = () => {
 
     return (
     <div className="hero-container prociono-regular">
-        <img src="" alt="logoImage" />
         <h1>Pawsitive Match</h1>
         <p>Find Your Furry Forever Friend!</p>
         <Link to={"/signup"}>
