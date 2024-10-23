@@ -45,6 +45,30 @@ const populateUserPets = async ({ user }) => {
     }
 }
 
+const updatePetAndUser = async ({ user, pet }) => {
+
+    const token = `${localStorage.getItem('token')}`  
+    
+    try {
+        const res = await fetch(`${BACKEND_URL}/pets/adopt/${pet._id}`, {
+            method: 'PATCH',
+            headers: { 
+                'Content-Type': 'application/json', 
+                'Authorization': `Bearer ${token}`,
+            },
+
+        })
+        const json = await res.json();
+        if (json.error) {
+            throw new Error(json.error)
+        }
+        return json;
+    } catch (error) {
+        console.log(error)
+        throw error
+    }
+}
+
 
 const specificPet = async (pet) => {
     try {
@@ -56,7 +80,7 @@ const specificPet = async (pet) => {
         if (json.err) {
             throw new Error(json.err);
         }
-        console.log(pet)
+        console.log(json)
         return json;
     } catch (error) {
         console.log(error)
@@ -122,4 +146,4 @@ const updatePet = async (petId, updatedPet) => {
     }
 }
 
-export default {populatePets, populateUserPets , specificPet, submitPet, updatePet}
+export default {populatePets, populateUserPets , specificPet, submitPet, updatePet , updatePetAndUser}

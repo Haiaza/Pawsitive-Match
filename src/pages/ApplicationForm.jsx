@@ -2,7 +2,6 @@ import { useParams } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import petServices from '../services/petServices';
-import userServices from '../services/userServices';
 
 const AdoptionForm = ({ user }) => {
     console.log(user)
@@ -21,6 +20,7 @@ const AdoptionForm = ({ user }) => {
                 }
                 const fetchedPet = await petServices.specificPet(id);
                 setPet(fetchedPet);
+                console.log(fetchedPet)
             } catch (error) {
                 if (error.message.includes('token')) {
                     setError("Authentication error. Please log in again.");
@@ -33,33 +33,20 @@ const AdoptionForm = ({ user }) => {
         };
         fetchPet();
     }, [id, navigate]);
-    
+
     const handleAdopt = async () => {
-        setIsAdopting(true)
-
+        setIsAdopting(true) // 
         try {
-            const updatedPet = {...pet, isAdopted: true, adoptedBy: user._id }
-            const savedPet = await petServices.updatePet(id, updatedPet)
-
-            console.log(pet) //pet object
-            console.log(pet._id) //pet object Id
-            await petServices.specificPet(id, updatedPet)
-
-            const updatedUser = {
-                ...user,
-                adoptedPets: [...(user.adoptedPets || []), id]
-            }
-            console.log(updatedUser)
-            console.log(user._id)
-            await userServices.updateUser(user._id, updatedUser) 
-
-            setPet(savedPet)
-
-        } catch (error) {
-            console.log("Error during adoption:", error)
+            const response  = await petServices.updatePetAndUser({user,pet})
+            setPet(response.pet); // Update pet in state
+        }catch (error) {
+            console.log("Error adopting pet:", error);
+        } finally {
+            setIsAdopting(false); // Reset loading state
         }
-    }
-
+    }        
+    
+console.log(pet)
     return ( 
         <div>
         {pet ? ( 
