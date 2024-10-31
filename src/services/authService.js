@@ -1,4 +1,4 @@
-const BACKEND_URL = 'http://localhost:3000'; // The Express API url
+const BACKEND_URL = 'https://pawsitive-backend.netlify.app/'; // The Express API url
 
 const signUp = async (userData) => {
   try {

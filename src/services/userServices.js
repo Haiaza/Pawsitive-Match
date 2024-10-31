@@ -1,4 +1,4 @@
-const BACKEND_URL = 'http://localhost:3000';
+const BACKEND_URL = 'https://pawsitive-backend.netlify.app/';
 
 const updateUser = async (userId, updatedUser) => {
     const token = localStorage.getItem('token')
